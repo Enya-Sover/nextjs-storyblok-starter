@@ -6,7 +6,7 @@ const linkClass = "text-black hover:bg-neutral-100 border-1 py-2 px-15 border-bl
 const descriptionClass = "text-lg md:text-xl lg:text-2xl text-bold text-gray-400 w-[60%]"
 
 export default function Hero({ blok }) {
-    console.log("hero", blok)
+
     return (
         <div className="flex flex-col gap-15 justify-center items-center text-center h-full m-15" {...storyblokEditable(blok)} >
             <div className="flex flex-col items-center gap-7">

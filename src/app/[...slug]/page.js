@@ -1,41 +1,34 @@
-//Example of a dynamic page ex
-// about-us, blog/post-title, contact-us, etc.
+// // app/[...slug]/page.js
 
-import { getStoryblokApi } from "@/lib/storyblok";
-import { notFound } from "next/navigation";
-import { StoryblokStory } from '@storyblok/react/rsc';
+// import { getStoryblokApi } from "@/lib/storyblok";
+// import { StoryblokStory } from "@storyblok/react/rsc";
+// import { notFound } from "next/navigation";
 
+// export default async function Page({ params }) {
+//   try {
+//     console.log("params", params);
+//     if (!params || !params.slug) {
+//       throw new Error("Slug parameter is missing");
+//     }
+//     const { slug } = await params;
 
-export default async function Page({ params }) {
-  try {
-    //Array of slug parts ex ['blog', 'post-title']
-    const { slug } = await params;
-    const data = await fetchData(slug);
+//     const data = await fetchData(slug);
+//     console.log("slug data", data);
 
-    //TODO: Replace with StoryblokStory component and add a fallback component
-    if(data?.data?.story?.content?.component === "config"){
-      throw new Error("CONFIG_ERROR");
-    }
-    const storyblokApi = getStoryblokApi();
-  const products  = await storyblokApi.get(`cdn/stories/`, {
-    version: "draft",
-    content_type: "product",
-  });
+//     if (!data?.story) return notFound();
 
-    return (
-        <div className="page">
-          <StoryblokStory story={data.data.story} />
-        </div>
-      );
-  } catch (error) {
-    console.error("Error fetching data:", error, error.message);
-    return notFound();
-  }
-}
+//     return <StoryblokStory story={data.story} />;
+//   } catch (error) {
+//     console.error("Storyblok fetch error:", error);
+//     return notFound();
+//   }
+// }
 
-export async function fetchData(slug) {
-  const storyblokApi = getStoryblokApi();
-  return await storyblokApi.get(`cdn/stories/${slug.join("/")}`, {
-    version: "draft",
-  });
-}
+// export async function fetchData(slug) {
+//   const storyblokApi = getStoryblokApi();
+//   const realSlug = slug ? slug.join("/") : "home";
+//   const { data } = await storyblokApi.get(`cdn/stories/${realSlug}`, {
+//     version: "draft",
+//   });
+//   return data;
+// }

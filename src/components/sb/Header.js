@@ -8,11 +8,11 @@ export default async function Header({ blok }) {
 
   return (
     <div
-      {...storyblokEditable(blok)} className="w-full bg-fixed min-h-[150px]" style={{backgroundImage: `url(${blok?.logo?.filename})`}}
+      {...storyblokEditable(blok)} className="border-b border-black text-black flex flex-row gap-10 p-3 pl-25" style={{backgroundImage: `url(${blok?.logo?.filename})`}}
     >             
 
         {blok.links.map((link, i)=> {
-          return   <Link href={link.links.cached_url} key={i} >{link.label}</Link>
+          return   <Link href={link.links.cached_url} className={i === 0 ? "font-extrabold": ""} key={i} >{link.label}</Link>
         })}        
     </div>
   );

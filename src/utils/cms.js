@@ -1,7 +1,14 @@
 import { getStoryblokApi } from "@storyblok/react/rsc";
 
-export class CMS {
 
+export class CMS {
+    static classnames = {
+        bigTitleClass: "font-bold text-4xl md:text-5xl lg:text-6xl text-black",
+        linkClass: "text-black hover:bg-neutral-100 border-1 py-2 px-15 border-black inline-block",
+        descriptionClass: "text-lg md:text-xl lg:text-2xl text-bold text-gray-400 w-[60%]",
+
+
+    }
     static async sbGet(path, params) {
         return getStoryblokApi().get(path, params);
     }

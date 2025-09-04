@@ -12,7 +12,7 @@ export default async function ProductList({ blok }) {
         <div className="flex flex-row">
           {filteredProducts.length > 0 ? filteredProducts?.map((product) => {
             const { slug } = product;
-            // console.log("product", product)
+
             const { _uid, title, description, image, price } = product.content;
             return (
                 <div key={_uid} >

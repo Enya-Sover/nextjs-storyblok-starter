@@ -4,7 +4,7 @@ import ProductList from "./ProductList";
 
 export default function Products({ blok }) {
 const classNameToUseLater = "grid gap-4 w-full grid-cols-[repeat(auto-fit,minmax(15.625rem,1fr))]"
-// console.log("blok", blok)
+
   return (
     <div key={blok._uid}
       {...storyblokEditable(blok)}

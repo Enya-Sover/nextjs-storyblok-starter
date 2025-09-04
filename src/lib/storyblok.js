@@ -8,12 +8,14 @@ import DoesNotExist from '@/components/sb/DoesNotExist';
 import Hero from '@/components/sb/Hero';
 import Header from '@/components/sb/Header';
 import Footer from '@/components/sb/Footer';
-import About from '@/app/about/page';
+import About from '@/components/sb/About';
 import ProductList from '@/components/sb/ProductList';
+import Product from '@/components/sb/Product';
 export const components = {
     // Add your components here
 
     productList: ProductList,
+    product: Product,
     about: About,
     header: Header,
     footer: Footer,

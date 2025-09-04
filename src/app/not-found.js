@@ -52,7 +52,7 @@ export default function NotFound() {
           )}
         >
           <Link
-            href="/"
+            href="/home"
             className={cn(
               "inline-flex items-center justify-center px-8 py-4",
               "bg-blue-600 hover:bg-blue-700 text-white font-medium",

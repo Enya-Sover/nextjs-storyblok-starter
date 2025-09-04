@@ -4,27 +4,27 @@ import Link from "next/link";
 export default async function ProductList({ blok }) {
    
     const products = await CMS.getProducts();
-    const filteredProducts = products.filter((product) => blok?.products.includes(product.uuid));
-    // console.log("hela blok", blok)
+    const filteredProducts = await products.filter((product) => blok?.products.includes(product.uuid));
     return (
-      <section       className="text-black flex flex-col">
+      <section className="text-black flex flex-col">
         <h1>{blok?.title}</h1>
         <p>{blok?.description}</p>
-        <div>
-          {filteredProducts.map((product, i) => {
+        <div className="flex flex-row">
+          {filteredProducts.length > 0 ? filteredProducts?.map((product) => {
             const { slug } = product;
-            console.log("product", product)
-            const { _uid, title, text, image, price } = product.content;
+            // console.log("product", product)
+            const { _uid, title, description, image, price } = product.content;
             return (
-              <Link href={`/products/${slug}`} key={_uid}>
-                <div key={_uid}>
+                <div key={_uid} >
+              <Link  href={`/products/${slug}`} key={_uid}>
                   <img src={image?.filename} alt={title} width={200} height={200} />
                   <h2 className="text-black">{title}</h2>
                   <p className="text-black">${price}</p>
-                </div>
+
               </Link>
+                </div>
             )
-          })}
+          }): <p>Loading products...</p>}
         </div>
       </section>
     )

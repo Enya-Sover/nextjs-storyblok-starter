@@ -2,24 +2,20 @@
 import { getStoryblokApi } from "@/lib/storyblok";
 import { StoryblokStory } from "@storyblok/react/rsc";
 import { notFound } from "next/navigation";
+import { CMS } from "@/utils/cms";
 
 export default async function ProductPage({ params }) {
   const { slug } = params;
 
-  const { data } = await fetchProduct(slug);
+  const story = await CMS.getProduct(slug);
 
-  if (!data?.story) return notFound();
+  if (!story) return notFound();
 
   return (
     <div className="page p-4">
-      <StoryblokStory story={data.story} />
+      <StoryblokStory story={story} />
     </div>
   );
 }
 
-async function fetchProduct(slug) {
-  const storyblokApi = getStoryblokApi();
-  return await storyblokApi.get(`cdn/stories/products/${slug}`, {
-    version: "draft",
-  });
-}
+

@@ -7,9 +7,12 @@ export default async function ProductList({ blok }) {
     const filteredProducts = await products.filter((product) => blok?.products.includes(product.uuid));
     return (
       <section className="text-black flex flex-col">
-        <h1>{blok?.title}</h1>
-        <p>{blok?.description}</p>
-        <div className="flex flex-row">
+        <div className="px-20 py-15">
+
+        <h1 className={CMS.classNames.midTitleClass}>{blok?.title}</h1>
+        <p className={CMS.classNames.midDescriptionClass}>{blok?.description}</p>
+        </div>
+        <div className="flex flex-row px-20">
           {filteredProducts.length > 0 ? filteredProducts?.map((product) => {
             const { slug } = product;
 

@@ -2,10 +2,13 @@ import { getStoryblokApi } from "@storyblok/react/rsc";
 
 
 export class CMS {
-    static classnames = {
-        bigTitleClass: "font-bold text-4xl md:text-5xl lg:text-6xl text-black",
-        linkClass: "text-black hover:bg-neutral-100 border-1 py-2 px-15 border-black inline-block",
+    static classNames = {
+        bigTitleClass: "font-bold text-4xl text-black",
+        midTitleClass: "font-extrabold text-3xl text-black py-3",
         descriptionClass: "text-lg md:text-xl lg:text-2xl text-bold text-gray-400 w-[60%]",
+        midDescriptionClass: "text-base text-bold text-black w-[52%]",
+        smallDescriptionClass: "text-sm text-bold text-black w-[79%] py-2",
+        linkClass: "text-black hover:bg-neutral-100 border-1 py-2 px-15 border-black inline-block",
 
 
     }

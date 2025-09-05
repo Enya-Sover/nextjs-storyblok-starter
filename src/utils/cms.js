@@ -24,7 +24,7 @@ export class CMS {
         );
         return data.story;
     }
-    
+
     static async getProducts() {
         const productsResponse = await this.sbGet("cdn/stories", {
             starts_with: "products/",
@@ -33,10 +33,22 @@ export class CMS {
 
         return productsResponse.data.stories;
     }
+
+    static async getThreeProducts(limit = 3) {
+        const productsResponse = await this.sbGet("cdn/stories", {
+            starts_with: "products/",
+            version: "draft",
+            sort_by: "created_at:desc",
+            per_page: limit,
+        });
+
+        return productsResponse.data.stories;
+    }
+    
     static async getProduct(slug) {
         const { data } = await this.sbGet(`cdn/stories/products/${slug}`, this.getDefaultSBParams());
         return data.story;
-      }
+    }
 
     static getDefaultSBParams() {
         return {

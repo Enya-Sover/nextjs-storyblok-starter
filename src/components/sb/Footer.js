@@ -3,7 +3,6 @@ import Link from "next/link";
 import { CMS } from "@/utils/cms";
 
 export default function Footer({ blok }) {
-  console.log("Här har vi about", blok.about)
 
   return (
     <div

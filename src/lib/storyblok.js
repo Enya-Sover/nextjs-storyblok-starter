@@ -10,14 +10,17 @@ import Header from '@/components/sb/Header';
 import Footer from '@/components/sb/Footer';
 import About from '@/components/sb/About';
 import ProductList from '@/components/sb/ProductList';
-import Product from '@/components/sb/Product';
 import Global_settings from '@/components/sb/Global_settings';
+import Latest_products from '@/components/sb/Latest_products';
+import Product from '@/components/sb/Product';
+
 
 export const components = {
     // Add your components here
-    global_settings: Global_settings,
-    productList: ProductList,
     product: Product,
+    global_settings: Global_settings,
+    latest_products: Latest_products,
+    productList: ProductList,
     about: About,
     header: Header,
     footer: Footer,

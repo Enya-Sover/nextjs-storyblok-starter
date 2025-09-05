@@ -11,7 +11,6 @@ export default function About({ blok }) {
             <div className="flex flex-col items-center gap-7">
                 <h1 className={bigTitleClass}>{blok.title}</h1>
                 <div className={descriptionClass}>{blok.description}</div>
-                <p>hej från about</p>
             </div>
 
         </div>

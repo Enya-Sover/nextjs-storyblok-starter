@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import { CMS } from "@/utils/cms";
 
 export default async function ProductPage({ params }) {
-  const { slug } = params;
+  const { slug } = await params;
 
   const story = await CMS.getProduct(slug);
 

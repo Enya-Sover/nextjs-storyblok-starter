@@ -1,5 +1,6 @@
 import { storyblokEditable } from "@storyblok/react";
 import Link from "next/link";
+import { CMS } from "@/utils/cms";
 
 
 
@@ -8,12 +9,16 @@ export default async function Header({ blok }) {
 
   return (
     <div
-      {...storyblokEditable(blok)} className="border-b border-black text-black flex flex-row gap-10 p-3 pl-25" style={{backgroundImage: `url(${blok?.logo?.filename})`}}
-    >             
+      {...storyblokEditable(blok)} className="border-b border-black text-black flex flex-row gap-10 p-3 pl-25" style={{ backgroundImage: `url(${blok?.logo?.filename})` }}
+    >
 
-        {blok.links.map((link, i)=> {
-          return   <Link href={link.links.cached_url} className={i === 0 ? "font-extrabold": ""} key={i} >{link.label}</Link>
-        })}        
+      {blok.links.map((link, i) => {
+        const href = link.links.cached_url.startsWith("/")
+          ? link.links.cached_url
+          : "/" + link.links.cached_url 
+
+        return <Link href={href} className={i === 0 ? "font-extrabold" : ""} key={i} >{link.label}</Link>
+      })}
     </div>
   );
 }

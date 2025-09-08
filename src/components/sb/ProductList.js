@@ -36,9 +36,11 @@ export default function ProductList({ blok }) {
       </div>
       <div className="px-20">
         {products.length > 0 ? (
+          console.log("products", products),
           <div className="grid grid-cols-4 gap-6">
             {products
               .filter(filterByCategory)
+              .filter(product => product.name !== "products")
               .map(product => {
                 const { slug } = product;
 

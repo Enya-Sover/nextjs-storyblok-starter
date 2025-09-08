@@ -26,7 +26,7 @@ export class CMS {
   static async getProducts() {
     const productsResponse = await this.sbGet("cdn/stories", {
       starts_with: "products/",
-      version: "draft",
+      ...this.getDefaultSBParams()
     });
 
     return productsResponse.data.stories;

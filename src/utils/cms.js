@@ -53,7 +53,7 @@ export class CMS {
 
   static getDefaultSBParams() {
     return {
-      version: "draft",
+      version: process.env.VERCEL_ENV === "production" ? "published" : "draft",
       resolve_links: "url",
       cv: Date.now(),
     };

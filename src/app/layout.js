@@ -1,10 +1,9 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import StoryBlokProvider from "@/components/StoryBlokProvider";
-import { getStoryblokApi } from "@/lib/storyblok";
+import { getStoryblokApi } from "@storyblok/react/rsc";  // 👈 ändra här
 import Header from "@/components/sb/Header";
 import Footer from "@/components/sb/Footer";
-
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -22,8 +21,8 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }) {
-  const storyblok = getStoryblokApi();
-  const global = await storyblok.get("cdn/stories/global", {
+  const storyblokApi = getStoryblokApi();   
+  const global = await storyblokApi.get("cdn/stories/global", {
     version: "draft",
   });
 

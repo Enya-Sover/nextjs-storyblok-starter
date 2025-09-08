@@ -39,7 +39,6 @@ export default function ProductList({ blok }) {
           <div className="grid grid-cols-4 gap-6">
             {products
               .filter(filterByCategory)
-              .slice(1)
               .map(product => {
                 const { slug } = product;
 

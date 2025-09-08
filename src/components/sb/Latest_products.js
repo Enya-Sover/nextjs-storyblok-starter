@@ -5,7 +5,6 @@ import Link from "next/link";
 
 export default async function Latest_products({ blok }) {
     const products = await CMS.getThreeProducts();
-    console.log("filtered products:", products);
 
     return (
         <div

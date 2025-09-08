@@ -3,7 +3,8 @@ import { notFound } from "next/navigation";
 import { CMS } from "@/utils/cms";
 
 export default async function Page({ params }) {
-  const slug = await params.slug ? params.slug.join("/") : "home";
+  params = await params
+  const slug = params.slug ? params.slug.join("/") : "home";
   const story = await CMS.getStory(slug);
 
   if (!story) return notFound();

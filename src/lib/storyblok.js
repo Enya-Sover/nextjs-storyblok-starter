@@ -42,5 +42,4 @@ storyblokInit({
   components,
 });
 
-// 👉 nu kan du bara importera getStoryblokApi där du behöver den
 export { getStoryblokApi };

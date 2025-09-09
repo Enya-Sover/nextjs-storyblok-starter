@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useState } from "react";
 
 export default function ProductList({ blok, products }) {
-  console.log("blok: ", blok)
 
   const [selectedCategory, setSelectedCategory] = useState('');
 

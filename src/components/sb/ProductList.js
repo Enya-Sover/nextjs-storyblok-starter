@@ -35,7 +35,7 @@ export default function ProductList({ blok, products }) {
       </div>
       <div className="px-20">
         {products.length === 0 ? <p>Loading products...</p> : 
-        filteredProducts.length === 0 ? <p>No products found matching your kriteria...</p> : (
+        filteredProducts.length === 0 ? <p>No products found matching your criteria...</p> : (
           <div className="grid grid-cols-4 gap-6">
             {products
               .filter(filterByCategory)

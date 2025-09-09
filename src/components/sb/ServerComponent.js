@@ -8,5 +8,5 @@ export default function ServerComponent({ blok }) {
     if(!Component) {
         return <DoesNotExist blok={blok} />
     }
-    return <StoryblokServerComponent blok={blok} />
+    return <StoryblokServerComponent blok={blok}/>
 }

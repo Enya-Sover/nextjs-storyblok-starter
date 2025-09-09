@@ -3,8 +3,8 @@ import { CMS } from "@/utils/cms";
 import Link from "next/link";
 
 
-export default async function Latest_products({ blok }) {
-    const products = await CMS.getThreeProducts();
+export default async function Latest_products({ blok, products }) {
+    const latestProducts = products?.slice(0, 3) ?? [];
 
     return (
         <div
@@ -17,7 +17,7 @@ export default async function Latest_products({ blok }) {
             </div>
             <div className="grid grid-cols-3 gap-2 w-max mx-auto">
 
-                {products.map((product, i) => {
+                {latestProducts?.map((product, i) => {
                     const { title, image } = product.content;
                     return (
                         <div key={product.uuid} className={i === 0 || i=== 2 ? "py-25" : ""}>

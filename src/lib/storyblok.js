@@ -31,11 +31,13 @@ export const components = {
   doesNotExist: DoesNotExist,
 };
 
-export const getStoryblokApi = storyblokInit({
-	accessToken: process.env.STORYBLOK_DELIVERY_API_ACCESS_TOKEN || process.env.NEXT_PUBLIC_STORYBLOK_DELIVERY_API_ACCESS_TOKEN,
-	use: [apiPlugin],
-	apiOptions: {
-		region: 'eu',
-	},
-    components
+storyblokInit({
+  accessToken: process.env.STORYBLOK_DELIVERY_API_ACCESS_TOKEN || process.env.NEXT_PUBLIC_STORYBLOK_DELIVERY_API_ACCESS_TOKEN,
+  use: [apiPlugin],
+  apiOptions: {
+    region: "eu"
+  },
+  components
 });
+
+export { getStoryblokApi };

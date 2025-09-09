@@ -7,7 +7,8 @@ import { CMS } from '@/utils/cms';
 
 export default function Product({ blok }) {
 
-    const colors = {
+
+    const colorChart = {
         red: "bg-red-500",
         blue: "bg-blue-500",
         green: "bg-green-500",
@@ -26,12 +27,13 @@ export default function Product({ blok }) {
                 </div>
                 <p className={CMS.classNames.smallDescriptionClass}>{blok.description}</p>
                 <div className="flex flex-row gap-2">
-                    {blok.sizes && blok.sizes?.map(size => <span className='bg-gray-200 hover:bg-gray-300 border w-10 text-center' key={size.size}>{size.size}</span>)}
+                    {blok.sizes && blok.sizes?.map(size =>
+                    <span className='bg-gray-200 hover:bg-gray-300 border w-10 text-center' key={size.size}>{size.size}</span>)}
                 </div>
                 <div>
                     <p className='text-gray-500'>{blok.color_title}</p>
                     {blok.colors && blok.colors?.map(color => {
-                        return <span className={`w-6 h-6 rounded-full border ${colors[color.value]} inline-block mr-2`} key={color.value}></span>
+                        return <span className={`w-6 h-6 rounded-full border ${colorChart[color.color]} inline-block mr-2`} key={color.color}></span>
                     })}
                 </div>
             </div>

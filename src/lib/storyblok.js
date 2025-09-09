@@ -33,8 +33,7 @@ export const components = {
 
 storyblokInit({
   accessToken:
-    process.env.STORYBLOK_DELIVERY_API_ACCESS_TOKEN ||
-    process.env.NEXT_PUBLIC_STORYBLOK_DELIVERY_API_ACCESS_TOKEN,
+    process.env.STORYBLOK_DELIVERY_API_ACCESS_TOKEN || process.env.NEXT_PUBLIC_STORYBLOK_DELIVERY_API_ACCESS_TOKEN,
   use: [apiPlugin],
   apiOptions: {
     region: "eu",

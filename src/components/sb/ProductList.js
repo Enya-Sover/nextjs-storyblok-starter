@@ -15,7 +15,6 @@ export default function ProductList({ blok }) {
 
   const filterByCategory = (product) => {
     if (!selectedCategory) return true
-    console.log("Product category:", product.content.category, "Selected:", selectedCategory);
 
     return (product.content.category?.toLowerCase() === selectedCategory.toLowerCase())
   }
@@ -26,17 +25,17 @@ export default function ProductList({ blok }) {
 
         <h1 className={CMS.classNames.midTitleClass}>{blok?.title}</h1>
         <p className={CMS.classNames.midDescriptionClass}>{blok?.description}</p>
+        
       </div>
       <div className="flex flex-row px-20 w-[50] gap-3">
         {blok.categories.map(category => {
-            const isActive = selectedCategory === category.title; 
+          const isActive = selectedCategory === category.title;
           return <button onClick={() => handleCategoryClick(category.title)} key={category._uid}
-          className={`${CMS.classNames.linkClass} ${isActive ? "bg-black text-white " : "bg-white text-black hover:bg-neutral-100"}`}>{category.title}</button>
+            className={`${CMS.classNames.linkClass} ${isActive ? "bg-black text-white " : "bg-white text-black hover:bg-neutral-100"}`}>{category.title}</button>
         })}
       </div>
       <div className="px-20">
         {products.length > 0 ? (
-          console.log("products", products),
           <div className="grid grid-cols-4 gap-6">
             {products
               .filter(filterByCategory)
@@ -45,7 +44,6 @@ export default function ProductList({ blok }) {
                 const { slug } = product;
 
                 const { _uid, title, image, price } = product.content;
-                console.log("product", product)
 
                 return (
                   <div key={_uid} className="w-full">

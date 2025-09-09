@@ -1,15 +1,12 @@
 "use client"
 import { CMS } from "@/utils/cms";
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
-export default function ProductList({ blok }) {
-  const [products, setProducts] = useState([]);
+export default function ProductList({ blok, products }) {
+  console.log("blok: ", blok)
+
   const [selectedCategory, setSelectedCategory] = useState('');
-
-  useEffect(() => {
-    CMS.getProducts().then(data => setProducts(data));
-  }, []);
 
   const handleCategoryClick = (title) => setSelectedCategory(title)
 
@@ -28,7 +25,7 @@ export default function ProductList({ blok }) {
         
       </div>
       <div className="flex flex-row px-20 w-[50] gap-3">
-        {blok.categories.map(category => {
+        {blok.categories?.map(category => {
           const isActive = selectedCategory === category.title;
           return <button onClick={() => handleCategoryClick(category.title)} key={category._uid}
             className={`${CMS.classNames.linkClass} ${isActive ? "bg-black text-white " : "bg-white text-black hover:bg-neutral-100"}`}>{category.title}</button>

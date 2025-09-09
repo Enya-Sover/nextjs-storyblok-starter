@@ -12,7 +12,6 @@ export default async function Page({ params }) {
   if (!story) return notFound();
   const products = await CMS.getProducts();
   
-  const productListBlock = story.content.body.find(b => b.component === "productList");
 
   if (slug === "products") {
     return (

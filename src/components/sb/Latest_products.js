@@ -4,7 +4,8 @@ import Link from "next/link";
 
 
 export default async function Latest_products({ blok, products }) {
-    const latestProducts = products?.slice(0, 3) ?? [];
+    const latestProducts = products?.sort((a, b) => new Date(b.content.created_at) - new Date(a.content.created_at)).filter(a => a.name!=="products").slice(0, 3);
+    console.log("latestProducts", latestProducts);
 
     return (
         <div
@@ -12,6 +13,7 @@ export default async function Latest_products({ blok, products }) {
             <div className="flex flex-col justify-center items-center text-center h-full m-15">
                 <h1 className={CMS.classNames.midTitleClass}>{blok.title}</h1>
                 <p className={CMS.classNames.smallDescriptionClass}>{blok.description}</p>
+
                 {blok.button && blok.button.map((link, i) => (
                     <Link href={link.link.cached_url} className={CMS.classNames.linkClass} key={i} >{link.title}</Link>))}
             </div>

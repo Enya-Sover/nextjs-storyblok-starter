@@ -3,7 +3,6 @@ import { apiPlugin, storyblokInit, getStoryblokApi } from "@storyblok/react/rsc"
 
 import Page from "@/components/sb/Page";
 import Teaser from "@/components/sb/Teaser";
-import Feature from "@/components/sb/Feature";
 import Grid from "@/components/sb/Grid";
 import DoesNotExist from "@/components/sb/DoesNotExist";
 import Hero from "@/components/sb/Hero";
@@ -23,7 +22,6 @@ export const components = {
   about: About,
   header: Header,
   footer: Footer,
-  feature: Feature,
   page: Page,
   grid: Grid,
   teaser: Teaser,

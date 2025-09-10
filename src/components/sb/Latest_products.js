@@ -18,7 +18,6 @@ export default async function Latest_products({ blok, products }) {
                     <Link href={link.link.cached_url} className={CMS.classNames.linkClass} key={i} >{link.title}</Link>))}
             </div>
             <div className="grid grid-cols-3 gap-2 w-max mx-auto">
-
                 {latestProducts?.map((product, i) => {
                     const { title, image } = product.content;
                     return (

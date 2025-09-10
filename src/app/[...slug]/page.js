@@ -2,16 +2,16 @@ import { StoryblokStory } from "@storyblok/react/rsc";
 import { notFound } from "next/navigation";
 import { CMS } from "@/utils/cms";
 import ProductList from "@/components/sb/ProductList";
-import Latest_products from "@/components/sb/Latest_products";
+import Three_latest_products from "@/components/sb/three_latest_products";
 
 export default async function Page({ params }) {
   params = await params;
   const slug = params.slug ? params.slug.join("/") : "home";
   const story = await CMS.getStory(slug);
-console.log("story", story);
+  console.log("story", story);
   if (!story) return notFound();
   const products = await CMS.getProducts();
-  
+
 
   if (slug === "products") {
     return (
@@ -20,12 +20,18 @@ console.log("story", story);
       </div>
     );
   }
-
-  return (
+  if (slug === "about" || slug === "home") return (
     <div className="page p-4">
       <StoryblokStory story={story} />
-      <Latest_products blok={story.content.body} products={products} />
-
+      <Three_latest_products blok={story.content.body} products={products} />
     </div>
-  );
+  )
+  else {
+    return (
+      <div className="page p-4">
+        <StoryblokStory story={story} />
+
+      </div>
+    )
+  }
 }

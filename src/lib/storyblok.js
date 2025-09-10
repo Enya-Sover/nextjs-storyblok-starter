@@ -13,8 +13,10 @@ import ProductList from "@/components/sb/ProductList";
 import Global_settings from "@/components/sb/Global_settings";
 import Latest_products from "@/components/sb/Latest_products";
 import Product from "@/components/sb/Product";
+import Three_latest_products from "@/components/sb/three_latest_products";
 
 export const components = {
+  three_latest_products: Three_latest_products,
   product: Product,
   global_settings: Global_settings,
   latest_products: Latest_products,

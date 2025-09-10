@@ -84,7 +84,7 @@ export default function Header({ blok, categories }) {
         {errorMessage && <p className="text-red-500">{errorMessage}</p>}
 
       </div>
-      <p className="px-10">👜</p>
+      <p className="px-10">👜 3</p>
     </div>
   );
 }

@@ -8,7 +8,7 @@ export default async function Page({ params }) {
   params = await params;
   const slug = params.slug ? params.slug.join("/") : "home";
   const story = await CMS.getStory(slug);
-  console.log("story", story);
+
   if (!story) return notFound();
   const products = await CMS.getProducts();
 

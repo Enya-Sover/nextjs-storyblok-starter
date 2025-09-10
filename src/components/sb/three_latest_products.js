@@ -5,7 +5,6 @@ import Link from "next/link";
 
 export default async function Three_latest_products({ blok, products }) {
     const latestProducts = products?.sort((a, b) => new Date(b.content.created_at) - new Date(a.content.created_at)).filter(a => a.name !== "products").slice(0, 3);
-    console.log("latestProducts", latestProducts);
     
     return (
         <div

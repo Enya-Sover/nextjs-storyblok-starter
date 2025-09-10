@@ -10,19 +10,22 @@ export default function Header({ blok, categories, products }) {
   const [searchProp, setSearchProp] = useState("")
   const [errorMessage, setErrorMessage] = useState("")
   const [open, setOpen] = useState(false);
-  const productSlugs = products.map(product => product.slug)
 
-
+  const productMap = products.reduce((acc, product) => {
+    acc[product?.content?.title?.toLowerCase()] = product.slug;
+    return acc;
+  }, {});
 
   const handleSearchProp = (value) => {
-    setSearchProp(value)
-    if (productSlugs.includes(value)) {
-      setErrorMessage("")
-      window.location.href = `/products/${value}`;
+    setSearchProp(value);
+    const slug = productMap[value.toLowerCase()]; 
+    if (slug) {
+      setErrorMessage("");
+      window.location.href = `/products/${slug}`;
     } else {
-      setErrorMessage(`Product "${value}" not found`)
+      setErrorMessage(`Product "${value}" not found`);
     }
-  }
+  };
 
 
   const searchBar = blok.form[0]

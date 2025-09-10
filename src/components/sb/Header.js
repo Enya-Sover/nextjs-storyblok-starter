@@ -55,8 +55,8 @@ export default function Header({ blok, categories, products }) {
                 {isProducts && open && (
                   <ul className="absolute top-full left-0 bg-white border shadow-lg w-48" onMouseLeave={() => isProducts && setOpen(false)}>
                     {categories.map(cat => (
-                      <Link href="products">
-                        <li key={cat}
+                      <Link href="products" key={cat}>
+                        <li 
                           className="px-4 py-2 hover:bg-gray-200 cursor-pointer">
                           {capitalizeFirstLetter(cat)}
                         </li>

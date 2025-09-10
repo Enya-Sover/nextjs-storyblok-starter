@@ -22,7 +22,6 @@ export const metadata = {
 };
 const products = await CMS.getProducts();
 
-// Extrahera unika kategorier
 const categories = Array.from(
   new Set(products.map(product => product.content.category))
 );
@@ -39,7 +38,7 @@ export default async function RootLayout({ children }) {
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
-          <Header blok={global.data.story.content.header[0]} categories={categories} />
+          <Header blok={global.data.story.content.header[0]} categories={categories} products={products} />
           {children}
           <Footer blok={global.data.story.content.footer[0]} />
         </body>

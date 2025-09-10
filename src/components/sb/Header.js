@@ -5,24 +5,23 @@ import { useState } from "react";
 import { CMS } from "@/utils/cms";
 
 
-export default function Header({ blok, categories }) {
+export default function Header({ blok, categories, products }) {
 
   const [searchProp, setSearchProp] = useState("")
   const [errorMessage, setErrorMessage] = useState("")
   const [open, setOpen] = useState(false);
+  const productSlugs = products.map(product => product.slug)
+
 
 
   const handleSearchProp = (value) => {
     setSearchProp(value)
-    CMS.getProduct(value).then(data => {
-      if (data) {
-        window.location.href = `/products/${data.slug}`
-      } else {
-        setErrorMessage(`Product ${value} not found`)
-      }
-    }).catch(err => {
+    if (productSlugs.includes(value)) {
+      setErrorMessage("")
+      window.location.href = `/products/${value}`;
+    } else {
       setErrorMessage(`Product "${value}" not found`)
-    })
+    }
   }
 
 

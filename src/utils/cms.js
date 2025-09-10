@@ -42,7 +42,22 @@ export class CMS {
 
     return productsResponse.data.stories;
   }
-
+  static async getProductsByCategory(category) {
+    // Hämta alla produkter
+    const { data } = await this.sbGet(
+      "cdn/stories/",
+      this.getDefaultSBParams()
+    );
+  
+    const products = data.stories.filter(
+      (story) =>
+        story.content?.category &&
+        story.content.category.toLowerCase() === category.toLowerCase()
+    );
+  
+    return products;
+  }
+  
   static async getProduct(slug) {
     const { data } = await this.sbGet(
       `cdn/stories/products/${slug}`,

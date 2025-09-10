@@ -5,10 +5,12 @@ import { useState } from "react";
 import { CMS } from "@/utils/cms";
 
 
-export default function Header({ blok }) {
+export default function Header({ blok , categories}) {
 
   const [searchProp, setSearchProp] = useState("")
   const [errorMessage, setErrorMessage] = useState("")
+  const [open, setOpen] = useState(false);
+
 
   const handleSearchProp = (value) => {
     setSearchProp(value)
@@ -18,24 +20,55 @@ export default function Header({ blok }) {
       } else {
         setErrorMessage(`Product ${value} not found`)
       }
-    }).catch (err => {
+    }).catch(err => {
       setErrorMessage(`Product "${value}" not found`)
     })
   }
+
 
   const searchBar = blok.form[0]
   return (
     <div
       {...storyblokEditable(blok)} className="border-b border-black text-black flex flex-row gap-10 p-3 pl-25" style={{ backgroundImage: `url(${blok?.logo?.filename})` }}
     >
+      <nav className="flex gap-4">
+        {blok.links.map((link, i) => {
+          const href = link.links.cached_url.startsWith("/")
+            ? link.links.cached_url
+            : "/" + link.links.cached_url;
 
-      {blok.links.map((link, i) => {
-        const href = link.links.cached_url.startsWith("/")
-          ? link.links.cached_url
-          : "/" + link.links.cached_url
+          const isProducts = href.includes("products");
+          const capitalizeFirstLetter = (string) => {
+            return string.charAt(0).toUpperCase() + string.slice(1);
+          }
 
-        return <Link href={href} className={i === 0 ? "font-extrabold" : ""} key={i} >{link.label}</Link>
-      })}
+          return (
+            <div key={i} className="relative">
+              <Link
+                href={href}
+                className={i === 0 ? "font-extrabold" : ""}
+                onMouseEnter={() => isProducts && setOpen(true)}
+              >
+                {link.label}
+              </Link>
+
+              {isProducts && open && (
+                <ul className="absolute top-full left-0 bg-white border shadow-lg w-48" onMouseLeave={() => isProducts && setOpen(false)}>
+                  {categories.map(cat => (
+                    <Link href="products">
+                    <li key={cat} 
+                    className="px-4 py-2 hover:bg-gray-200 cursor-pointer">
+                      {capitalizeFirstLetter(cat)}
+                    </li>
+
+                    </Link>
+                  ))}
+                </ul>
+              )}
+            </div>
+          );
+        })}
+      </nav>
 
       <form>
         <input onKeyDown={(e) => {

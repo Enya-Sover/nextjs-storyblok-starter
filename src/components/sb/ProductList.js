@@ -14,6 +14,7 @@ export default function ProductList({ blok, products }) {
 
     return (product.content.category?.toLowerCase() === selectedCategory.toLowerCase())
   }
+  console.log("products", products)
   const filteredProducts = products
     .filter(filterByCategory)
     .filter(product => product.name !== "products");
@@ -40,6 +41,7 @@ export default function ProductList({ blok, products }) {
               {products
                 .filter(filterByCategory)
                 .filter(product => product.name !== "products")
+                .sort((a, b) => b.content.category.localeCompare(a.content.category))
                 .map(product => {
                   const { slug } = product;
 

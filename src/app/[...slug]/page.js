@@ -13,11 +13,14 @@ export default async function Page({ params, searchParams }) {
 
   const products = await CMS.getProducts();
   console.log("products in page:", products);
+if(slug=== "products"){
+ <ProductList blok={story.content.body[0]} products={products} />
+
+}
 
   return (
     <div className="page p-4">
       <StoryblokStory story={story} />
-      {slug === "products" && <ProductList blok={story.content.body[0]} products={products} />}
     </div>
   );
 }

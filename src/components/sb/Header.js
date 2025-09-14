@@ -11,7 +11,7 @@ export default function Header({ blok, categories, products }) {
   const router = useRouter();
   const filteredProducts = products.filter(p => p.name !== "products");
 
-  // Set med alla kategorier
+
   const categorySet = new Set(categories.map(cat => cat.toLowerCase()));
 
   const handleSearch = (e) => {
@@ -28,14 +28,12 @@ export default function Header({ blok, categories, products }) {
       return;
     }
   
-    // 2. Kolla om sökordet matchar en kategori
     if (categorySet.has(value)) {
       router.push(`/products?category=${value}`);
       setErrorMessage("");
       return;
     }
   
-    // 3. Annars visa fel
     setErrorMessage(`"${query}" not found`);
   };
   
@@ -98,14 +96,9 @@ export default function Header({ blok, categories, products }) {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder={searchBar?.placeholder || "Search category..."}
-            className="border px-2 py-1"
+            className=""
           />
-          <button
-            type="submit"
-            className="px-3 py-1 bg-black text-white hover:bg-gray-800"
-          >
-            Search
-          </button>
+        
         </form>
 
         {errorMessage && <p className="text-red-500">{errorMessage}</p>}

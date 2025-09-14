@@ -2,20 +2,30 @@
 import { CMS } from "@/utils/cms";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 
-export default function ProductList({ blok }) {
-  const [selectedCategory, setSelectedCategory] = useState('');
-  const [products, setProducts] = useState([]);
+export default function ProductList({ blok, products }) {
+  const searchParams = useSearchParams();
+  const categoryFromUrl = searchParams?.get("category") || "";
+
+  const [selectedCategory, setSelectedCategory] = useState(categoryFromUrl);
+  const [loadedProducts, setLoadedProducts] = useState(products || []);
 
   useEffect(() => {
-    CMS.getProducts().then(setProducts);
-  }, []);
+    setSelectedCategory(categoryFromUrl);
+  }, [categoryFromUrl]);
+  
+  useEffect(() => {
+    if (!products || products.length === 0) {
+      CMS.getProducts().then(setLoadedProducts);
+    }
+  }, [products]);
 
   const handleCategoryClick = (title) => setSelectedCategory(title);
 
-  const filteredProducts = products
-    .filter(product => !selectedCategory || product.content.category?.toLowerCase() === selectedCategory.toLowerCase())
-    .filter(product => product.name !== "products")
+  const filteredProducts = loadedProducts
+    .filter(p => !selectedCategory || p.content.category?.toLowerCase() === selectedCategory.toLowerCase())
+    .filter(p => p.name !== "products")
     .sort((a, b) => b.content.category.localeCompare(a.content.category));
 
   return (
@@ -28,8 +38,9 @@ export default function ProductList({ blok }) {
       <div className="flex flex-row px-20 w-[50] gap-3">
         <button
           onClick={() => handleCategoryClick("")}
-          className={`${CMS.classNames.linkClass} ${selectedCategory === "" ? "bg-black text-white" : "bg-white text-black hover:bg-neutral-100"}`}>
-            All products
+          className={`${CMS.classNames.linkClass} ${selectedCategory === "" ? "bg-black text-white" : "bg-white text-black hover:bg-neutral-100"}`}
+        >
+          All products
         </button>
         {blok.categories?.map(category => {
           const isActive = selectedCategory === category.title;
@@ -46,9 +57,9 @@ export default function ProductList({ blok }) {
       </div>
 
       <div className="px-20">
-        {products.length === 0 ? (
+        {loadedProducts?.length === 0 ? (
           <p>Loading products...</p>
-        ) : filteredProducts.length === 0 ? (
+        ) : filteredProducts?.length === 0 ? (
           <p>No products found matching your criteria...</p>
         ) : (
           <div className="grid grid-cols-4 gap-6">

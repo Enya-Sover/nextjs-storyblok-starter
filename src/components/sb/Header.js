@@ -2,48 +2,63 @@
 import { storyblokEditable } from "@storyblok/react";
 import Link from "next/link";
 import { useState } from "react";
-import { CMS } from "@/utils/cms";
-
+import { useRouter } from "next/navigation";
 
 export default function Header({ blok, categories, products }) {
-
-  const [searchProp, setSearchProp] = useState("")
-  const [errorMessage, setErrorMessage] = useState("")
+  const [query, setQuery] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const [open, setOpen] = useState(false);
+  const router = useRouter();
+  const filteredProducts = products.filter(p => p.name !== "products");
 
-  const productMap = products.reduce((acc, product) => {
-    acc[product?.content?.title?.toLowerCase()] = product.slug;
-    return acc;
-  }, {});
+  // Set med alla kategorier
+  const categorySet = new Set(categories.map(cat => cat.toLowerCase()));
 
-  const handleSearchProp = (value) => {
-    setSearchProp(value);
-    const slug = productMap[value.toLowerCase()]; 
-    if (slug) {
+  const handleSearch = (e) => {
+    e.preventDefault();
+    const value = query.toLowerCase().trim();
+  
+    const productMatch = filteredProducts.find(
+      p => p.content.title.toLowerCase() === value
+    );
+  
+    if (productMatch) {
+      router.push(`/products/${productMatch.slug}`);
       setErrorMessage("");
-      window.location.href = `/products/${slug}`;
-    } else {
-      setErrorMessage(`Product "${value}" not found`);
+      return;
     }
+  
+    // 2. Kolla om sökordet matchar en kategori
+    if (categorySet.has(value)) {
+      router.push(`/products?category=${value}`);
+      setErrorMessage("");
+      return;
+    }
+  
+    // 3. Annars visa fel
+    setErrorMessage(`"${query}" not found`);
   };
+  
 
+  const searchBar = blok.form?.[0];
 
-  const searchBar = blok.form[0]
+  const capitalizeFirstLetter = (string) =>
+    string.charAt(0).toUpperCase() + string.slice(1);
+
   return (
     <div
-      {...storyblokEditable(blok)} className="border-b border-black text-black flex flex-row items-center justify-between" style={{ backgroundImage: `url(${blok?.logo?.filename})` }}
+      {...storyblokEditable(blok)}
+      className="border-b border-black text-black flex flex-row items-center justify-between"
+      style={{ backgroundImage: `url(${blok?.logo?.filename})` }}
     >
       <div className="flex flex-row gap-10 p-3 pl-25">
         <nav className="flex gap-4">
-          {blok.links.map((link, i) => {
+          {blok.links?.map((link, i) => {
             const href = link.links.cached_url.startsWith("/")
               ? link.links.cached_url
               : "/" + link.links.cached_url;
 
             const isProducts = href.includes("products");
-            const capitalizeFirstLetter = (string) => {
-              return string.charAt(0).toUpperCase() + string.slice(1);
-            }
 
             return (
               <div key={i} className="relative">
@@ -56,14 +71,18 @@ export default function Header({ blok, categories, products }) {
                 </Link>
 
                 {isProducts && open && (
-                  <ul className="absolute top-full left-0 bg-white border shadow-lg w-48" onMouseLeave={() => isProducts && setOpen(false)}>
-                    {categories.map(cat => (
-                      <Link href="products" key={cat}>
-                        <li 
-                          className="px-4 py-2 hover:bg-gray-200 cursor-pointer">
+                  <ul
+                    className="absolute top-full left-0 bg-white border shadow-lg w-48"
+                    onMouseLeave={() => setOpen(false)}
+                  >
+                    {categories.map((cat) => (
+                      <Link
+                        href={`/products?category=${cat.toLowerCase()}`}
+                        key={cat}
+                      >
+                        <li className="px-4 py-2 hover:bg-gray-200 cursor-pointer">
                           {capitalizeFirstLetter(cat)}
                         </li>
-
                       </Link>
                     ))}
                   </ul>
@@ -73,19 +92,25 @@ export default function Header({ blok, categories, products }) {
           })}
         </nav>
 
-        <form>
-          <input onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              e.preventDefault();
-              handleSearchProp(e.target.value)
-            }
-          }}
-            placeholder={searchBar.placeholder}>
-          </input>
+        <form onSubmit={handleSearch} className="flex gap-2">
+          <input
+            type="text"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder={searchBar?.placeholder || "Search category..."}
+            className="border px-2 py-1"
+          />
+          <button
+            type="submit"
+            className="px-3 py-1 bg-black text-white hover:bg-gray-800"
+          >
+            Search
+          </button>
         </form>
-        {errorMessage && <p className="text-red-500">{errorMessage}</p>}
 
+        {errorMessage && <p className="text-red-500">{errorMessage}</p>}
       </div>
+
       <p className="px-10">👜 3</p>
     </div>
   );

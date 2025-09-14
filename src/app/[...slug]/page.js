@@ -17,7 +17,7 @@ export default async function Page({ params, searchParams }) {
   return (
     <div className="page p-4">
       <StoryblokStory story={story} />
-     <ProductList blok={story.content.body[0]} products={products} />
+      {slug === "products" && <ProductList blok={story.content.body[0]} products={products} />}
     </div>
   );
 }

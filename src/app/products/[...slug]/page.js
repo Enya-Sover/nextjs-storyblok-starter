@@ -1,4 +1,4 @@
-// app/products/[slug]/page.js
+
 import { StoryblokStory } from "@storyblok/react/rsc";
 import { notFound } from "next/navigation";
 import { CMS } from "@/utils/cms";

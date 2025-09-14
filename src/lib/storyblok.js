@@ -19,7 +19,7 @@ export const components = {
   three_latest_products: Three_latest_products,
   product: Product,
   global_settings: Global_settings,
-  latest_products: Latest_products,
+  latest_products: Three_latest_products,
   productList: ProductList,
   about: About,
   header: Header,

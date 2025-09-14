@@ -10,22 +10,16 @@ export default async function Page({ params }) {
   const story = await CMS.getStory(slug);
 
   if (!story) return notFound();
-  const products = await CMS.getProducts();
 
 
   if (slug === "products") {
     return (
       <div className="page p-4">
-        <ProductList blok={story.content.body[0]} products={products} />
+        <ProductList blok={story.content.body[0]} />
       </div>
     );
   }
-  if (slug === "about" || slug === "home") return (
-    <div className="page p-4">
-      <StoryblokStory story={story} />
-      <Three_latest_products blok={story.content.body} products={products} />
-    </div>
-  )
+  
   else {
     return (
       <div className="page p-4">

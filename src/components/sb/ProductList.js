@@ -10,11 +10,12 @@ export default function ProductList({ blok, products }) {
 
   const [selectedCategory, setSelectedCategory] = useState(categoryFromUrl);
   const [loadedProducts, setLoadedProducts] = useState(products || []);
-
+  console.log("products prop from product list:", products);
+  console.log("loaded products from product list:", loadedProducts);
   useEffect(() => {
     setSelectedCategory(categoryFromUrl);
   }, [categoryFromUrl]);
-  
+
   useEffect(() => {
     if (!products || products.length === 0) {
       CMS.getProducts().then(setLoadedProducts);

@@ -12,6 +12,7 @@ export default async function Page({ params, searchParams }) {
   if (!story) return notFound();
 
   const products = await CMS.getProducts();
+  console.log("products in page:", products);
 
   return (
     <div className="page p-4">
